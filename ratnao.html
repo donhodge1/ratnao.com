@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='impact-site-verification' value='7f428348-7f63-4184-ae5a-bc2db70016b2'>
+<title>RATNAO.com — Right Now in Texas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rust: #C8441A;
+    --rust-light: #E8622E;
+    --rust-dark: #8B2E0E;
+    --cream: #F5EDD8;
+    --cream-dark: #E8D9BB;
+    --brown: #2B1A0F;
+    --brown-mid: #4A2E1A;
+    --sand: #B8956A;
+    --sand-light: #D4B48A;
+    --night: #0D0806;
+    --sky: #1C3D5A;
+    --gold: #D4A017;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--night);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(to bottom, rgba(13,8,6,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 3px; color: var(--rust-light);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--sand-light); font-size: 13px; letter-spacing: 1.5px;
+    text-transform: uppercase; text-decoration: none; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cream); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(200,68,26,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(28,61,90,0.3) 0%, transparent 50%),
+      linear-gradient(180deg, #0D0806 0%, #150C07 40%, #1A1008 100%);
+  }
+
+  /* Star field */
+  .stars {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--del, 0s);
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: var(--lo, 0.2); }
+    50% { opacity: var(--hi, 0.9); }
+  }
+
+  /* Lone Star SVG */
+  .lone-star {
+    position: absolute; top: 12%; right: 8%;
+    opacity: 0.06; pointer-events: none;
+    animation: slowspin 120s linear infinite;
+  }
+  @keyframes slowspin { to { transform: rotate(360deg); } }
+
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--rust-light); font-weight: 400; margin-bottom: 1.5rem;
+    position: relative;
+    animation: fadeup 1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(88px, 18vw, 180px);
+    letter-spacing: 8px; line-height: 0.9;
+    color: var(--cream);
+    position: relative;
+    animation: fadeup 1s 0.15s ease both;
+  }
+  .hero-title .tx-accent { color: var(--rust-light); }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--sand-light);
+    margin-top: 1rem;
+    font-weight: 400;
+    position: relative;
+    animation: fadeup 1s 0.3s ease both;
+  }
+
+  .hero-divider {
+    width: 60px; height: 1px;
+    background: var(--rust);
+    margin: 2rem auto;
+    position: relative;
+    animation: fadeup 1s 0.45s ease both;
+  }
+
+  .hero-desc {
+    font-size: 15px; color: var(--sand); max-width: 560px;
+    line-height: 1.8; font-weight: 300;
+    position: relative;
+    animation: fadeup 1s 0.6s ease both;
+  }
+
+  .hero-cities {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    position: relative;
+    animation: fadeup 1s 0.75s ease both;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .city-pill {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--sand-light);
+  }
+  .city-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rust-light); }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--rust);
+    padding: 12px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .ticker-track {
+    display: flex; gap: 0;
+    animation: ticker 40s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 3px;
+    padding: 0 2.5rem; color: rgba(255,255,255,0.9);
+    flex-shrink: 0;
+  }
+  .ticker-sep { color: rgba(255,255,255,0.4); padding: 0; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--rust-light); margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 56px); letter-spacing: 2px;
+    color: var(--cream); line-height: 1; margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    color: var(--sand); font-size: 16px; margin-bottom: 3rem;
+  }
+
+  /* ── CATEGORY GRID ── */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cat-card {
+    background: var(--brown);
+    padding: 2.5rem 1.75rem;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--rust);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .cat-card:hover { background: var(--brown-mid); }
+  .cat-card:hover::before { transform: scaleX(1); }
+  .cat-icon { font-size: 32px; margin-bottom: 1rem; display: block; }
+  .cat-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 2px; color: var(--cream);
+    display: block; margin-bottom: 6px;
+  }
+  .cat-count { font-size: 12px; color: var(--sand); letter-spacing: 1px; }
+
+  /* ── FEATURED EVENTS ── */
+  .events-section { background: #110A05; margin: 0; max-width: 100%; padding: 5rem 3rem; }
+  .events-inner { max-width: 1200px; margin: 0 auto; }
+  .events-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+  @media (max-width: 900px) { .events-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .events-grid { grid-template-columns: 1fr; } }
+
+  .event-card {
+    background: var(--brown);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.25s;
+    cursor: pointer;
+  }
+  .event-card:hover { transform: translateY(-4px); }
+  .event-card.featured {
+    grid-column: span 2;
+  }
+  .event-img {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-card.featured .event-img { height: 220px; }
+  .event-img-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px;
+  }
+  .event-tag {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--rust);
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: white; padding: 4px 10px; border-radius: 2px;
+  }
+  .event-body { padding: 1.25rem 1.25rem 1.5rem; }
+  .event-meta { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rust-light); margin-bottom: 6px; }
+  .event-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--cream); margin-bottom: 4px; }
+  .event-details { font-size: 13px; color: var(--sand); }
+
+  /* img bg colors */
+  .bg-music { background: linear-gradient(135deg, #1a0a2e, #2d1060); }
+  .bg-rodeo { background: linear-gradient(135deg, #1e1005, #3d1e08); }
+  .bg-food { background: linear-gradient(135deg, #0e1a0a, #1e3d10); }
+  .bg-flight { background: linear-gradient(135deg, #0a0e1e, #10203d); }
+  .bg-sport { background: linear-gradient(135deg, #1e0a0a, #3d1010); }
+
+  /* ── CITIES MAP STRIP ── */
+  .cities-strip { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .cities-strip::-webkit-scrollbar { display: none; }
+  .city-card {
+    flex: 0 0 200px;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .city-card:hover { background: rgba(200,68,26,0.08); }
+  .city-card:last-child { border-right: none; }
+  .city-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px; color: var(--cream);
+    display: block; margin-bottom: 4px;
+  }
+  .city-tagline { font-size: 12px; color: var(--sand); font-style: italic; font-family: 'Playfair Display', serif; }
+  .city-count { font-size: 11px; letter-spacing: 1px; color: var(--rust-light); margin-top: 8px; display: block; }
+
+  /* ── FLIGHTS BAND ── */
+  .flights-band {
+    background: var(--sky);
+    padding: 4rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  .flights-band::before {
+    content: '✈';
+    position: absolute; right: -2rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 200px; opacity: 0.04;
+    pointer-events: none;
+  }
+  .flights-inner { max-width: 1200px; margin: 0 auto; }
+  .flights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+  .flight-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px; padding: 1.25rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .flight-card:hover { background: rgba(255,255,255,0.1); }
+  .flight-route { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: white; }
+  .flight-from { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .flight-price { font-size: 20px; font-weight: 500; color: var(--gold); }
+  .flight-label { font-size: 10px; color: rgba(255,255,255,0.4); text-align: right; }
+
+  /* ── TEXAS SOUL QUOTE ── */
+  .soul-section {
+    text-align: center; padding: 6rem 3rem;
+    background: linear-gradient(180deg, var(--night) 0%, #150C07 100%);
+  }
+  .soul-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-style: italic;
+    color: var(--cream);
+    max-width: 800px; margin: 0 auto;
+    line-height: 1.3;
+  }
+  .soul-quote em { color: var(--rust-light); font-style: normal; }
+  .soul-attr { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--sand); margin-top: 1.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown); border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem; text-align: center;
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 4px; color: var(--rust-light); }
+  .footer-tag { font-size: 12px; color: var(--sand); letter-spacing: 2px; margin-top: 4px; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 12px; color: var(--sand); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 2rem; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .events-section { padding: 4rem 1.5rem; }
+    .flights-band { padding: 3rem 1.5rem; }
+    .event-card.featured { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">RATNAO</a>
+  <ul class="nav-links">
+    <li><a href="#events">Events</a></li>
+    <li><a href="#cities">Cities</a></li>
+    <li><a href="#flights">Flights</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="stars" id="stars"></div>
+
+  <!-- Lone Star -->
+  <svg class="lone-star" width="500" height="500" viewBox="0 0 100 100">
+    <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" fill="white"/>
+  </svg>
+
+  <span class="hero-eyebrow">Everything Texas &nbsp;·&nbsp; Right Now</span>
+  <h1 class="hero-title">RAT<span class="tx-accent">NAO</span></h1>
+  <p class="hero-sub">That's Texas for "right now."</p>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">Concerts, rodeos, festivals, flights, food, sports, and the soul of the Lone Star State — all in one place. Whether you're born here or bound here.</p>
+
+  <div class="hero-cities">
+    <div class="city-pill"><div class="city-dot"></div>Austin</div>
+    <div class="city-pill"><div class="city-dot"></div>Houston</div>
+    <div class="city-pill"><div class="city-dot"></div>Dallas</div>
+    <div class="city-pill"><div class="city-dot"></div>San Antonio</div>
+    <div class="city-pill"><div class="city-dot"></div>El Paso</div>
+    <div class="city-pill"><div class="city-dot"></div>Marfa</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item">LIVE MUSIC IN AUSTIN</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">HOUSTON LIVESTOCK SHOW & RODEO</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">FLIGHTS FROM $89</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">STATE FAIR OF TEXAS — DALLAS</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">SOUTH BY SOUTHWEST — AUSTIN</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">SPURS VS THUNDER — SAN ANTONIO</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">MARFA LIGHTS FESTIVAL</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">LIVE MUSIC IN AUSTIN</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">HOUSTON LIVESTOCK SHOW & RODEO</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">FLIGHTS FROM $89</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">STATE FAIR OF TEXAS — DALLAS</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">SOUTH BY SOUTHWEST — AUSTIN</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">SPURS VS THUNDER — SAN ANTONIO</span>
+    <span class="ticker-item ticker-sep">★</span>
+    <span class="ticker-item">MARFA LIGHTS FESTIVAL</span>
+    <span class="ticker-item ticker-sep">★</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <span class="section-label">What's happening</span>
+  <h2 class="section-title">Pick Your Texas</h2>
+  <p class="section-sub">Every flavor of the Lone Star State, all ratnao.</p>
+
+  <div class="cat-grid">
+    <div class="cat-card">
+      <span class="cat-icon">🎸</span>
+      <span class="cat-name">Live Music</span>
+      <span class="cat-count">Austin · Houston · Dallas</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🤠</span>
+      <span class="cat-name">Rodeos & Fairs</span>
+      <span class="cat-count">HLSR · State Fair · Local circuits</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">✈️</span>
+      <span class="cat-name">Flights</span>
+      <span class="cat-count">Deals into all TX airports</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🌶️</span>
+      <span class="cat-name">Food & Drink</span>
+      <span class="cat-count">BBQ · Tex-Mex · Craft beer</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🏈</span>
+      <span class="cat-name">Sports</span>
+      <span class="cat-count">Cowboys · Astros · Spurs · Longhorns</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🌵</span>
+      <span class="cat-name">Outdoors</span>
+      <span class="cat-count">Big Bend · Guadalupe · Hill Country</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🎨</span>
+      <span class="cat-name">Arts & Culture</span>
+      <span class="cat-count">Marfa · Houston museums · Galleries</span>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🎪</span>
+      <span class="cat-name">Festivals</span>
+      <span class="cat-count">SXSW · ACL · Fiesta SA · More</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED EVENTS -->
+<div class="events-section" id="events">
+  <div class="events-inner">
+    <span class="section-label">Right now</span>
+    <h2 class="section-title">What's Hot This Week</h2>
+    <p class="section-sub">The events worth making the trip for.</p>
+
+    <div class="events-grid">
+      <div class="event-card featured">
+        <div class="event-img bg-music">
+          <div class="event-img-bg">🎸</div>
+          <span class="event-tag">Featured</span>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">Austin · Music · This Weekend</div>
+          <div class="event-name">Austin City Limits Music Festival</div>
+          <div class="event-details">Zilker Park — 130+ artists across 8 stages. The one and only.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-img bg-rodeo">
+          <div class="event-img-bg">🤠</div>
+          <span class="event-tag">Rodeo</span>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">Houston · March</div>
+          <div class="event-name">Houston Livestock Show & Rodeo</div>
+          <div class="event-details">World's largest livestock show. 3 weeks of pure Texas.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-img bg-food">
+          <div class="event-img-bg">🌶️</div>
+          <span class="event-tag">Food</span>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">Lockhart · BBQ Capital</div>
+          <div class="event-name">Texas BBQ Trail Weekend</div>
+          <div class="event-details">Kreuz. Smitty's. Black's. The holy trinity.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-img bg-sport">
+          <div class="event-img-bg">🏈</div>
+          <span class="event-tag">Sports</span>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">Dallas · AT&T Stadium</div>
+          <div class="event-name">Cowboys Home Game</div>
+          <div class="event-details">America's Team. America's Stadium. Enough said.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-img bg-flight">
+          <div class="event-img-bg">🌵</div>
+          <span class="event-tag">Outdoors</span>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">Marfa · West Texas</div>
+          <div class="event-name">Marfa Lights Viewing</div>
+          <div class="event-details">The mystery no one can explain. Go see for yourself.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CITIES -->
+<section id="cities">
+  <span class="section-label">Explore by city</span>
+  <h2 class="section-title">Texas Is Not One Place</h2>
+  <p class="section-sub">It's a whole universe of places.</p>
+  <div class="cities-strip">
+    <div class="city-card">
+      <span class="city-name">Austin</span>
+      <span class="city-tagline">Live music capital of the world</span>
+      <span class="city-count">240+ events this month</span>
+    </div>
+    <div class="city-card">
+      <span class="city-name">Houston</span>
+      <span class="city-tagline">Space City, food city, every city</span>
+      <span class="city-count">310+ events this month</span>
+    </div>
+    <div class="city-card">
+      <span class="city-name">Dallas</span>
+      <span class="city-tagline">Big D, big energy</span>
+      <span class="city-count">280+ events this month</span>
+    </div>
+    <div class="city-card">
+      <span class="city-name">San Antonio</span>
+      <span class="city-tagline">Where the river walks</span>
+      <span class="city-count">190+ events this month</span>
+    </div>
+    <div class="city-card">
+      <span class="city-name">El Paso</span>
+      <span class="city-tagline">Desert sun, border soul</span>
+      <span class="city-count">95+ events this month</span>
+    </div>
+    <div class="city-card">
+      <span class="city-name">Marfa</span>
+      <span class="city-tagline">Art in the middle of nowhere</span>
+      <span class="city-count">40+ events this month</span>
+    </div>
+  </div>
+</section>
+
+<!-- FLIGHTS -->
+<div class="flights-band" id="flights">
+  <div class="flights-inner">
+    <span class="section-label">Getting there</span>
+    <h2 class="section-title" style="color: white;">Flights Into Texas</h2>
+    <p class="section-sub" style="color: rgba(255,255,255,0.5);">Best fares we've spotted this week.</p>
+    <div class="flights-grid">
+      <div class="flight-card">
+        <div>
+          <div class="flight-route">LAX → AUS</div>
+          <div class="flight-from">Los Angeles to Austin</div>
+        </div>
+        <div>
+          <div class="flight-price">$89</div>
+          <div class="flight-label">one way</div>
+        </div>
+      </div>
+      <div class="flight-card">
+        <div>
+          <div class="flight-route">JFK → IAH</div>
+          <div class="flight-from">New York to Houston</div>
+        </div>
+        <div>
+          <div class="flight-price">$119</div>
+          <div class="flight-label">one way</div>
+        </div>
+      </div>
+      <div class="flight-card">
+        <div>
+          <div class="flight-route">SFO → DFW</div>
+          <div class="flight-from">San Francisco to Dallas</div>
+        </div>
+        <div>
+          <div class="flight-price">$99</div>
+          <div class="flight-label">one way</div>
+        </div>
+      </div>
+      <div class="flight-card">
+        <div>
+          <div class="flight-route">ORD → SAT</div>
+          <div class="flight-from">Chicago to San Antonio</div>
+        </div>
+        <div>
+          <div class="flight-price">$109</div>
+          <div class="flight-label">one way</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOUL QUOTE -->
+<div class="soul-section" id="about">
+  <p class="soul-quote">"Texas is not a state — it's a <em>state of mind.</em> And ratnao, it's calling."</p>
+  <p class="soul-attr">— ratnao.com</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RATNAO.COM</div>
+  <p class="footer-tag">Right Now in Texas</p>
+  <div class="footer-links">
+    <a href="#">Events</a>
+    <a href="#">Flights</a>
+    <a href="#">Cities</a>
+    <a href="#">About</a>
+    <a href="#">Submit an Event</a>
+    <a href="#">Advertise</a>
+  </div>
+  <p class="footer-copy">© 2026 ratnao.com — Everything Texas, right now.</p>
+</footer>
+
+<script>
+  // Generate star field
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      --dur:${2+Math.random()*4}s;
+      --del:${Math.random()*5}s;
+      --lo:${0.1+Math.random()*0.2};
+      --hi:${0.6+Math.random()*0.4};
+    `;
+    starsEl.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
